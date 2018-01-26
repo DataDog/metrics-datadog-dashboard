@@ -1,0 +1,544 @@
+{
+  "board_title": "PCF RabbitMQ - Overview",
+  "read_only": false,
+  "board_bgtype": "board_graph",
+  "created": "2018-01-25T22:39:17.616775+00:00",
+  "modified": "2018-01-25T22:39:17.616787+00:00",
+  "created_by": {
+    "disabled": false,
+    "handle": "chris.kelner@datadoghq.com",
+    "name": "Chris Kelner",
+    "is_admin": false,
+    "role": null,
+    "access_role": "st",
+    "verified": true,
+    "email": "chris.kelner@datadoghq.com",
+    "icon": "https://secure.gravatar.com/avatar/050676988f9e7bac456b6ece6cfcd16f?s=48&d=retro"
+  },
+  "height": 80,
+  "width": "100%",
+  "template_variables": [
+    {
+      "default": "*",
+      "prefix": "rabbitmq_queue",
+      "name": "rabbitmq_queue"
+    },
+    {
+    "default": "*",
+    "prefix": "rabbitmq_node",
+    "name": "rabbitmq_node"
+    },
+    {
+    "default": "*",
+    "prefix": "host",
+    "name": "host"
+    },
+    {
+      "default": "*",
+      "prefix": null,
+      "name": "scope"
+    }
+  ],
+  "templated": true,
+  "widgets": [
+    {
+      "board_id": 265717,
+      "sizing": "center",
+      "title_size": 16,
+      "title": true,
+      "url": "/static/images/saas_logos/small/rabbitmq@2x.png",
+      "margin": "",
+      "title_align": "left",
+      "title_text": "",
+      "height": 11,
+      "width": 21,
+      "y": 0,
+      "x": 0,
+      "type": "image"
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Memory used",
+      "height": 13,
+      "tile_def": {
+        "viz": "timeseries",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_system_memory{$rabbitmq_node} by {rabbitmq_node}",
+          "aggregator": "avg",
+          "conditional_formats": [],
+          "type": "line",
+          "style": {
+            "width": "normal",
+            "palette": "cool",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true
+      },
+      "width": 47,
+      "timeframe": "4h",
+      "y": 44,
+      "x": 121,
+      "legend_size": "0",
+      "type": "timeseries",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "File descriptors used",
+      "height": 13,
+      "tile_def": {
+        "viz": "timeseries",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_system_file_descriptors{$rabbitmq_node} by {rabbitmq_node}",
+          "aggregator": "avg",
+          "conditional_formats": [],
+          "type": "area",
+          "style": {
+            "width": "normal",
+            "palette": "dog_classic",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true
+      },
+      "width": 47,
+      "timeframe": "4h",
+      "y": 28,
+      "x": 121,
+      "legend_size": "0",
+      "type": "timeseries",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "tick": true,
+      "title_size": 16,
+      "font_size": "18",
+      "title": true,
+      "refresh_every": 30000,
+      "tick_pos": "50%",
+      "title_align": "left",
+      "tick_edge": "bottom",
+      "text_align": "center",
+      "title_text": "",
+      "auto_refresh": false,
+      "bgcolor": "gray",
+      "html": "Average resource utilization by node",
+      "y": 0,
+      "x": 121,
+      "height": 5,
+      "type": "note",
+      "width": 47
+    },
+    {
+      "board_id": 265717,
+      "tick": true,
+      "title_size": 16,
+      "font_size": "18",
+      "title": true,
+      "refresh_every": 30000,
+      "tick_pos": "50%",
+      "title_align": "left",
+      "tick_edge": "bottom",
+      "text_align": "center",
+      "title_text": "",
+      "auto_refresh": false,
+      "bgcolor": "gray",
+      "html": "  \nQueue throughput (avg messages per sec)",
+      "y": 0,
+      "x": 23,
+      "height": 5,
+      "type": "note",
+      "width": 47
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Total",
+      "height": 13,
+      "tile_def": {
+        "viz": "timeseries",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_published_rate{$rabbitmq_queue} by {rabbitmq_queue}+avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_delivered_rate{$rabbitmq_queue} by {rabbitmq_queue}+avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_redelivered_rate{$rabbitmq_queue} by {rabbitmq_queue}",
+          "aggregator": "avg",
+          "conditional_formats": [],
+          "type": "line",
+          "style": {
+            "width": "thick",
+            "palette": "dog_classic",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true
+      },
+      "width": 47,
+      "timeframe": "4h",
+      "y": 12,
+      "x": 23,
+      "legend_size": "0",
+      "type": "timeseries",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Delivered",
+      "height": 13,
+      "tile_def": {
+        "viz": "timeseries",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_delivered_rate{$rabbitmq_queue} by {rabbitmq_queue}",
+          "aggregator": "avg",
+          "conditional_formats": [],
+          "type": "line",
+          "style": {
+            "width": "thin",
+            "palette": "dog_classic",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true
+      },
+      "width": 47,
+      "timeframe": "4h",
+      "y": 44,
+      "x": 23,
+      "legend_size": "0",
+      "type": "timeseries",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Published",
+      "height": 13,
+      "tile_def": {
+        "viz": "timeseries",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_published_rate{$rabbitmq_queue} by {rabbitmq_queue}",
+          "aggregator": "avg",
+          "conditional_formats": [],
+          "type": "line",
+          "style": {
+            "width": "thin",
+            "palette": "cool",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true
+      },
+      "width": 47,
+      "timeframe": "4h",
+      "y": 28,
+      "x": 23,
+      "legend_size": "0",
+      "type": "timeseries",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Acknowledged",
+      "height": 13,
+      "tile_def": {
+        "viz": "timeseries",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_delivered_rate{$rabbitmq_queue} by {rabbitmq_queue}-avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_get_no_ack_rate{$rabbitmq_queue} by {rabbitmq_queue}",
+          "aggregator": "avg",
+          "conditional_formats": [],
+          "type": "line",
+          "style": {
+            "width": "thin",
+            "palette": "dog_classic",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true
+      },
+      "width": 47,
+      "timeframe": "4h",
+      "y": 60,
+      "x": 23,
+      "legend_size": "0",
+      "type": "timeseries",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Queues by depth",
+      "height": 45,
+      "tile_def": {
+        "viz": "toplist",
+        "requests": [{
+          "q": "top(max:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_depth{$rabbitmq_node} by {rabbitmq_queue}, 20, 'last', 'desc')",
+          "conditional_formats": [],
+          "style": {
+            "palette": "orange"
+          }
+        }]
+      },
+      "width": 47,
+      "timeframe": "10m",
+      "y": 28,
+      "x": 72,
+      "legend_size": "0",
+      "type": "toplist",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Consumer utilization",
+      "height": 13,
+      "tile_def": {
+        "viz": "timeseries",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_depth{$rabbitmq_queue} by {rabbitmq_queue}/avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_delivered{$rabbitmq_queue} by {rabbitmq_queue}",
+          "aggregator": "avg",
+          "conditional_formats": [],
+          "type": "line",
+          "style": {
+            "width": "thick",
+            "palette": "cool",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true
+      },
+      "width": 47,
+      "timeframe": "4h",
+      "y": 12,
+      "x": 72,
+      "legend_size": "0",
+      "type": "timeseries",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "title_size": 16,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Disk space free",
+      "height": 13,
+      "tile_def": {
+        "viz": "timeseries",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_system_disk_free{$rabbitmq_node} by {rabbitmq_node}/1024",
+          "aggregator": "avg",
+          "conditional_formats": [],
+          "type": "line",
+          "style": {
+            "width": "normal",
+            "palette": "purple",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true
+      },
+      "width": 47,
+      "timeframe": "4h",
+      "y": 12,
+      "x": 121,
+      "legend_size": "0",
+      "type": "timeseries",
+      "legend": false
+    },
+    {
+      "board_id": 266045,
+      "title_size": 16,
+      "autoscale": true,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Disk Alarms",
+      "height": 12,
+      "tile_def": {
+        "viz": "query_value",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_system_disk_free_alarm{$rabbitmq_node} by {rabbitmq_node}",
+          "aggregator": "last",
+          "conditional_formats": [{
+            "palette": "white_on_red",
+            "comparator": ">",
+            "value": "0"
+          },
+          {
+            "palette": "white_on_yellow",
+            "comparator": ">=",
+            "value": null
+          },
+          {
+            "palette": "white_on_green",
+            "comparator": "<",
+            "value": "1"
+          }],
+          "type": null,
+          "style": {
+            "width": "normal",
+            "palette": "dog_classic",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true,
+        "precision": "0"
+      },
+      "width": 21,
+      "timeframe": "10m",
+      "y": 43,
+      "x": 0,
+      "legend_size": "0",
+      "type": "query_value",
+      "legend": false
+    },
+    {
+      "board_id": 266045,
+      "title_size": 16,
+      "autoscale": true,
+      "title": true,
+      "title_align": "left",
+      "title_text": "Memory Alarms",
+      "height": 13,
+      "tile_def": {
+        "viz": "query_value",
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_system_mem_alarm{$rabbitmq_node} by {rabbitmq_node}",
+          "aggregator": "last",
+          "conditional_formats": [{
+            "palette": "white_on_red",
+            "comparator": ">",
+            "value": "0"
+          },
+          {
+            "palette": "white_on_yellow",
+            "comparator": ">=",
+            "value": null
+          },
+          {
+            "palette": "white_on_green",
+            "comparator": "<",
+            "value": "1"
+          }],
+          "type": null,
+          "style": {
+            "width": "normal",
+            "palette": "dog_classic",
+            "type": "solid"
+          }
+        }],
+        "autoscale": true,
+        "precision": "0"
+      },
+      "width": 21,
+      "timeframe": "10m",
+      "y": 58,
+      "x": 0,
+      "legend_size": "0",
+      "type": "query_value",
+      "legend": false
+    },
+    {
+      "board_id": 265717,
+      "tick": true,
+      "title_size": 16,
+      "font_size": "18",
+      "title": true,
+      "refresh_every": 30000,
+      "tick_pos": "50%",
+      "title_align": "left",
+      "tick_edge": "bottom",
+      "text_align": "center",
+      "title_text": "",
+      "auto_refresh": false,
+      "bgcolor": "gray",
+      "html": "Queue consumption",
+      "y": 0,
+      "x": 72,
+      "height": 5,
+      "type": "note",
+      "width": 47
+    },
+    {
+      "board_id": 266045,
+      "tick": false,
+      "title_size": 16,
+      "font_size": "14",
+      "title": true,
+      "refresh_every": 30000,
+      "tick_pos": "50%",
+      "title_align": "left",
+      "tick_edge": "left",
+      "text_align": "left",
+      "title_text": "",
+      "auto_refresh": false,
+      "bgcolor": "yellow",
+      "html": "Negative values indicate that message count is falling over time.",
+      "y": 6,
+      "x": 23,
+      "height": 5,
+      "type": "note",
+      "width": 47
+    },
+    {
+      "board_id": 266045,
+      "tick": false,
+      "title_size": 16,
+      "font_size": "14",
+      "title": true,
+      "refresh_every": 30000,
+      "tick_pos": "50%",
+      "title_align": "left",
+      "tick_edge": "left",
+      "text_align": "left",
+      "title_text": "",
+      "auto_refresh": false,
+      "bgcolor": "yellow",
+      "html": "Consumer utilization is a number between 0 and 1.",
+      "y": 6,
+      "x": 72,
+      "height": 5,
+      "type": "note",
+      "width": 47
+    },
+    {
+      "board_id": 266045,
+      "tick": false,
+      "title_size": 16,
+      "font_size": "14",
+      "title": true,
+      "refresh_every": 30000,
+      "tick_pos": "50%",
+      "title_align": "left",
+      "tick_edge": "left",
+      "text_align": "left",
+      "title_text": "",
+      "auto_refresh": false,
+      "bgcolor": "yellow",
+      "html": "Assign the variable 'rabbitmq_node' to see the resource use of specific nodes.",
+      "y": 6,
+      "x": 121,
+      "height": 5,
+      "type": "note",
+      "width": 47
+    }
+  ],
+  "id": 276326
+}

@@ -1,0 +1,219 @@
+{
+  "description": "p-mysql dashboard",
+  "title": "p-mysql dashboard",
+  "graphs": [
+    <% vm_guids.each do |vm_guid| %>
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          {
+            "q": "avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_threads_running{index:<%= vm_guid %>}",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_threads_connected{index:<%= vm_guid %>}",
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "Threads Running vs Threads Connected for <%= vm_guid %>"
+    },
+    <% end %>
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          {
+            "q": "per_minute(avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_com_select{deployment:<%= deployment_name %>})",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "per_minute(avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_com_update{deployment:<%= deployment_name %>})",
+            "type": "line"
+          },
+          {
+            "q": "per_minute(avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_com_insert{deployment:<%= deployment_name %>})",
+            "type": "line"
+          },
+          {
+            "q": "per_minute(avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_com_delete{deployment:<%= deployment_name %>})",
+            "type": "line"
+          },
+          {
+            "q": "per_minute(avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_com_replace_select{deployment:<%= deployment_name %>})",
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "Command counters per minute"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          <%=
+            vm_guids.map do |vm_guid|
+              <<-EOF.chomp
+          {
+            "q": "per_minute(avg:#{nozzle_name}.p_mysql.p_mysql_performance_questions{index:#{vm_guid}})",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          }
+              EOF
+            end.join(',')
+          %>
+        ],
+        "autoscale": true
+      },
+      "title": "avg questions per minute"
+    },
+    <% vm_guids.each do |vm_guid| %>
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          {
+            "q": "per_second(avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_created_tmp_files{index:<%= vm_guid %>})",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "per_second(avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_created_tmp_tables{index:<%= vm_guid %>})",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "per_second(avg:<%= nozzle_name %>.p_mysql.p_mysql_performance_created_tmp_disk_tables{index:<%= vm_guid %>})",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "Created tmp files for <%= vm_guid %>"
+    },
+    <% end %>
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          <%=
+            vm_guids.map do |vm_guid|
+              <<-EOF.chomp
+          {
+            "q": "avg:#{nozzle_name}.p_mysql.p_mysql_galera_wsrep_local_recv_queue_avg{index:#{vm_guid}}",
+            "conditional_formats": [],
+            "type": "line"
+          }
+              EOF
+            end.join(',')
+          %>
+        ],
+        "autoscale": true
+      },
+      "title": "wsrep_local_recv_queue_avg"
+    },
+    <% vm_guids.each do |vm_guid| %>
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          {
+            "q": "per_second(avg:<%= nozzle_name %>.p_mysql.p_mysql_innodb_row_lock_time{index:<%= vm_guid %>})",
+            "conditional_formats": [],
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "InnoDB Row Lock Time in milliseconds per second for <%= vm_guid %>"
+    },
+    <% end %>
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          <%=
+            vm_guids.map do |vm_guid|
+              <<-EOF.chomp
+                {
+                  "q": "avg:#{nozzle_name}.p_mysql.p_mysql_galera_wsrep_ready{index:#{vm_guid}}",
+                  "aggregator": "avg",
+                  "conditional_formats": [],
+                  "type": "line"
+                }
+              EOF
+            end.join(',')
+          %>
+        ],
+        "autoscale": true
+      },
+      "title": "galera wsrep_ready across vms"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          <%=
+            vm_guids.map do |vm_guid|
+              <<-EOF.chomp
+                {
+                  "q": "avg:#{nozzle_name}.p_mysql.p_mysql_galera_wsrep_cluster_size{index:#{vm_guid}}",
+                  "conditional_formats": [],
+                  "type": "line"
+                }
+              EOF
+            end.join(',')
+          %>
+        ],
+        "autoscale": true
+      },
+      "title": "galera wsrep_cluster_size across vms"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          <%=
+            vm_guids.map do |vm_guid|
+              <<-EOF.chomp
+                {
+                  "q": "avg:#{nozzle_name}.p_mysql.p_mysql_galera_wsrep_local_recv_queue_avg{index:#{vm_guid}}",
+                  "conditional_formats": [],
+                  "type": "line"
+                }
+              EOF
+            end.join(',')
+          %>
+        ],
+        "autoscale": true
+      },
+      "title": "galera wsrep_local_recv_queue_avg across vms"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          {
+            "q": "avg:bosh.healthmonitor.system.disk.persistent.percent{deployment:<%= deployment_name %>,job:mysql} by {index}",
+            "conditional_formats": [],
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "Disk space across vms"
+    }
+  ]
+}

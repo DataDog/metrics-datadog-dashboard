@@ -1,0 +1,80 @@
+{
+  "template_variables": [{
+    "default": "*",
+    "prefix": null,
+    "name": "scope"
+  }],
+  "graphs":
+  [
+    {
+      "definition": {
+        "requests": [{
+          "q": "sum:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_depth{$scope}"
+        }]
+      },
+      "title": "RabbitMQ total messages in queue"
+    },
+    {
+      "definition": {
+        "requests": [{
+          "q": "sum:cloudfoundry.nozzle.p.rabbitmq.memoryStats.numBytesAllocated{$scope}"
+        }]
+      },
+      "title": "RabbitMQ queue memory"
+    },
+    {
+      "definition": {
+        "requests": [{
+          "q": "avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_depth{$scope}/avg:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_messages_delivered{$scope}"
+        }]
+      },
+      "title": "RabbitMQ queue consumers"
+    },
+    {
+      "definition": {
+        "requests": [{
+          "q": "sum:cloudfoundry.nozzle.p_rabbitmq_rabbitmq_system_file_descriptors{$scope}"
+        }]
+      },
+      "title": "RabbitMQ node file descriptors"
+    },
+    {
+      "definition": {
+        "requests": [{
+          "q": "system.cpu.idle{$scope}, system.cpu.system{$scope}, system.cpu.iowait{$scope}, system.cpu.user{$scope}, system.cpu.stolen{$scope}, system.cpu.guest{$scope}"
+        }]
+      },
+      "title": "CPU usage (%) (WIP - May need BOSH Health Metrics)"
+    },
+    {
+      "definition": {
+        "requests": [{
+          "q": "sum:system.mem.usable{$scope},sum:system.mem.total{$scope}-sum:system.mem.usable{$scope}"
+        }]
+      },
+      "title": "System memory (WIP - May need BOSH Health Metrics)"
+    },
+    {
+      "definition": {
+        "requests": [{
+          "q": "system.load.1{$scope}"
+        }, {
+          "q": "system.load.5{$scope}"
+        }, {
+          "q": "system.load.15{$scope}"
+        }]
+      },
+      "title": "System load (WIP - May need BOSH Health Metrics)"
+    },
+    {
+      "definition": {
+        "requests": [{
+          "q": "sum:system.net.bytes_rcvd{$scope}"
+        }, {
+          "q": "sum:system.net.bytes_sent{$scope}"
+        }]
+      },
+      "title": "Network traffic (kb/s) (WIP - May need BOSH Health Metrics)"
+    }
+  ]
+}

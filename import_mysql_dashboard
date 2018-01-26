@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require 'erubis'
+
+require_relative 'lib/metrics_to_datadog'
+
+app_key = ENV['DATADOG_APP_KEY']
+api_key = ENV['DATADOG_API_KEY']
+
+if app_key.nil? || api_key.nil? then
+  puts "Please set DATADOG_APP_KEY and DATADOG_APP_KEY with your datadog credentials"
+  exit 1
+end
+
+dogclient = Dogapi::Client.new(api_key, app_key)
+
+config = YAML.load_file('./config/mysql_dashboard.yml')
+
+template = Erubis::Eruby.new(File.read('./dashboards/mysql.json.erb'))
+dashboard = JSON.parse(template.result(config))
+puts dogclient.create_dashboard(
+    dashboard["title"],
+    dashboard["description"],
+    dashboard["graphs"]
+)

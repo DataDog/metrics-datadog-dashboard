@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require_relative 'lib/metrics_to_datadog'
+
+app_key =ENV['DATADOG_APP_KEY']
+api_key = ENV['DATADOG_API_KEY']
+
+monitor_id = ARGV[0].to_i
+
+if app_key.nil? || api_key.nil? then
+  puts "Please set DATADOG_APP_KEY and DATADOG_APP_KEY with your datadog credentials"
+  exit 1
+end
+
+metrics = MetricsToDatadog.new(app_key, api_key)
+
+response = JSON.parse(metrics.get_monitor(monitor_id))
+monitor = response[1]
+
+puts JSON.dump(monitor)

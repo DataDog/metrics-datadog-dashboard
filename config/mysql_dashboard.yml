@@ -1,0 +1,7 @@
+---
+vm_guids:
+  - fb0a90ef-0b1f-46b8-a347-cc4949c4d83c
+  - 921bce94-9b62-46c0-a258-1fbde251841a
+  - 52e23620-842a-4e95-8353-692ff6537a9d
+deployment_name: p-mysql-0d26436a267c1124dbe3
+nozzle_name: cloudfoundry.nozzle

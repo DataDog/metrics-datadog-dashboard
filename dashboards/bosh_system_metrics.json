@@ -1,0 +1,133 @@
+{
+  "graphs": [
+    {
+      "definition": {
+        "viz": "timeseries",
+        "status": "done",
+        "requests": [
+          {
+            "q": "min:bosh.healthmonitor.system.cpu.sys{wtcdev2}",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "min:cloudfoundry.nozzle.bosh_system_metrics_forwarder.system.cpu.sys{wtcdev2}",
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "wtcdev2: sys cpu percent"
+    },
+    {
+      "definition": {
+        "viz": "query_value",
+        "requests": [
+          {
+            "q": "sum:cloudfoundry.nozzle.bosh_system_metrics_forwarder.system.healthy{job:bosh-system-metrics-forwarder,deployment:bosh-system-metrics-forwarder}",
+            "aggregator": "last",
+            "conditional_formats": [],
+            "type": "area"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "wtcdev2: number of healthy forwarders"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "status": "done",
+        "requests": [
+          {
+            "q": "avg:bosh.healthmonitor.system.cpu.user{wtcdev2}",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "avg:cloudfoundry.nozzle.bosh_system_metrics_forwarder.system.cpu.user{wtcdev2}",
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "wtcdev2: user cpu percent"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "requests": [
+          {
+            "q": "avg:bosh.healthmonitor.system.disk.ephemeral.percent{wtcdev2}",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "avg:cloudfoundry.nozzle.bosh_system_metrics_forwarder.system.disk.ephemeral.percent{wtcdev2}",
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "wtcdev2: ephemeral disk percent"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "status": "done",
+        "requests": [
+          {
+            "q": "avg:bosh.healthmonitor.system.mem.kb{wtcdev2}",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "avg:cloudfoundry.nozzle.bosh_system_metrics_forwarder.system.mem.kb{wtcdev2}",
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "wtcdev2: mem kb"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "status": "done",
+        "requests": [
+          {
+            "q": "avg:bosh.healthmonitor.system.mem.percent{wtcdev2}",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          },
+          {
+            "q": "avg:cloudfoundry.nozzle.bosh_system_metrics_forwarder.system.mem.percent{wtcdev2}",
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "wtcdev2: mem percent"
+    },
+    {
+      "definition": {
+        "viz": "timeseries",
+        "status": "done",
+        "requests": [
+          {
+            "q": "avg:bosh.healthmonitor.system.healthy{wtcdev2}, avg:cloudfoundry.nozzle.bosh_system_metrics_forwarder.system.healthy{wtcdev2}",
+            "aggregator": "avg",
+            "conditional_formats": [],
+            "type": "line"
+          }
+        ],
+        "autoscale": true
+      },
+      "title": "wtcdev2: healthy"
+    }
+  ]
+}
