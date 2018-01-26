@@ -10,7 +10,14 @@ It is worth noting that the metrics emitted by Cloud Foundry and those collected
 
 Additionally, all of these dashboards use to the default CF nozzle prefix: `cloudfoundry.nozzle.*`.
 
-# CF RabbitMQ example screenboard
+# CF RabbitMQ
+The metrics collected by the agent based [Datadog Integration](https://docs.datadoghq.com/integrations/rabbitmq/#data-collected) and [those emitted via the Firehose by Cloud Foundry](https://docs.pivotal.io/rabbitmq-cf/1-11/monitor.html#rabbitmq-metrics) are fairly different, though they do share a number core metrics. Primarily there are more metrics via the Datadog integration.
+
+The KPIs from [Cloud Foundry](https://docs.pivotal.io/rabbitmq-cf/1-11/monitor.html#server-kpis) and those from [Datadog](https://www.datadoghq.com/blog/rabbitmq-monitoring/#key-rabbitmq-metrics) vary somewhat as well. However both of these resources can be used as a basis for expanding on the Rabbit MQ dashboard examples below.
+
+The Dashboards below are converted Datadog out of the box Rabbit MQ Dashboards that come with the agent based integration that now leverage the cloud foundry namespace metrics (defaults to `cloudfoundry.nozzle.*`). They can be manipulated via the UI w/ new KPIs, graphs, and widgets to best suite the team(s) using them.
+
+## Example screenboard
 To push to Datadog:
 1. Set your DATADOG_APP_KEY and DATADOG_API_KEY in your environment (you can find them under Integrations > APIs)
 
@@ -21,7 +28,7 @@ To push to Datadog:
 
 1. Run `ruby import_static_screenboard [FILENAME]`, passing in the name of the file that contains your dashboard configuration. See `dashboards/rabbitmq.json` for an example.
 
-# CF RabbitMQ example timeboard
+## Example timeboard
 To push to Datadog:
 1. Set your DATADOG_APP_KEY and DATADOG_API_KEY in your environment (you can find them under Integrations > APIs)
 
