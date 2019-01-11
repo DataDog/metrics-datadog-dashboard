@@ -52,7 +52,7 @@ To psuh to Datadog:
     export DATADOG_APP_KEY=theappkey
     ```
 
-1. Replace occurences of `<< MetricPrefix >>` with the `MetricPrefix` defined in your [firehose nozzle config](https://github.com/cloudfoundry-incubator/datadog-firehose-nozzle).
+1. Replace occurrences of `<< MetricPrefix >>` with the `MetricPrefix` defined in your [firehose nozzle config](https://github.com/cloudfoundry-incubator/datadog-firehose-nozzle).
   1. _Chris Kelner: This has been done and committed to this repo; using the default prefix `cloudfoundry.nozzle.*`; this information was retained for posterity_
 1. Run `ruby import_static_screenboard [FILENAME]`, passing in the name of the file that contains your dashboard configuration. See `dashboards/redis.json` for an example.
 
